@@ -13,6 +13,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const line =
   "Day 214: my human said 'one quick question' at 09:03. It's 11:47. I've answered forty-one quick questions since, and he still thinks we're on the first one.";
 
+// Gate: the brief requires exactly one diary line of 1–200 characters.
+// Fail loudly instead of shipping an out-of-gate line.
+if (line.length < 1 || line.length > 200) {
+  throw new Error(`entry length ${line.length} is outside the 1–200 character gate`);
+}
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
 writeFileSync(`${outDir}/entry.txt`, line, "utf8");
